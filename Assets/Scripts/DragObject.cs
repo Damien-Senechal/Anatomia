@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class DragObject : MonoBehaviour
 {
@@ -16,8 +17,15 @@ public class DragObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
-        mOffset = gameObject.transform.position - GetMouseWorldPos();
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+        else
+        {
+            mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
+            mOffset = gameObject.transform.position - GetMouseWorldPos();
+        }
     }
 
     private Vector3 GetMouseWorldPos()
@@ -31,7 +39,15 @@ public class DragObject : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        transform.position = GetMouseWorldPos() + mOffset;
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+        else
+        {
+            transform.position = GetMouseWorldPos() + mOffset;
+        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
