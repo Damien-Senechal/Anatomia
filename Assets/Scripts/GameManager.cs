@@ -6,11 +6,21 @@ public class GameManager : MonoBehaviour
 {
     public GameObject UpCam;
     public GameObject DownCam;
+    public static bool[] verification = new bool[] {false, false, false, false};
+    public bool check = false;
+    public GameObject[] levels;
+    public GameObject[] canvas;
+    public int actualCanvas = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        for (int i = 0; i < verification.Length; i++)
+        {
+            verification[i] = false;
+        }
+        Debug.Log(canvas[actualCanvas]);
+        canvas[actualCanvas].SetActive(true);
     }
 
     // Update is called once per frame
@@ -41,5 +51,59 @@ public class GameManager : MonoBehaviour
                 DownCam.SetActive(true);
             }
         }
+
+        
+        for (int i = 0; i < verification.Length; i++)
+        {
+            if(verification[i] == false)
+            {
+                check = false;
+                return;
+            }
+            else
+            {
+                check = true;
+            }
+        }
+
+        //Debug.Log(check);
+
+        if(check)
+        {
+            Debug.Log("MES ENORMES BOULES");
+            check = false;
+            for (int i = 0; i < verification.Length; i++)
+            {
+                verification[i] = false;
+            }
+            levels[0].SetActive(false);
+            nextCanvas();
+        }
+    }
+
+    public void displayCanvas()
+    {
+        if (!canvas[actualCanvas].activeInHierarchy)
+        {
+            canvas[actualCanvas].SetActive(true);
+        }
+    }
+
+    public void hideCanvas()
+    {
+        if (canvas[actualCanvas].activeInHierarchy)
+        {
+            canvas[actualCanvas].SetActive(false);
+        }
+    }
+
+    public void nextCanvas()
+    {
+        if(canvas[actualCanvas].activeInHierarchy)
+        {
+            canvas[actualCanvas].SetActive(false);
+        }
+        actualCanvas++;
+        canvas[actualCanvas].SetActive(true);
     }
 }

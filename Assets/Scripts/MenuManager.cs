@@ -20,6 +20,6 @@ public class MenuManager : MonoBehaviour
 
     public void Continue()
     {
-        c.SetActive(false);
+
     }
 }

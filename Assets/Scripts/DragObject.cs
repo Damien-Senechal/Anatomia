@@ -58,24 +58,32 @@ public class DragObject : MonoBehaviour
             other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
             other.gameObject.GetComponent<Outline>().enabled = false;
             GetComponent<MeshRenderer>().enabled = false;
+            GameManager.verification[0] = true;
         }
         else if(this.name == "Crane a placer" && other.name == "Emplacement crane")
         {
             other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
             other.gameObject.GetComponent<Outline>().enabled = false;
             GetComponent<MeshRenderer>().enabled = false;
+            GameManager.verification[1] = true;
         }
         else if (this.name == "Cubitus a placer" && other.name == "Emplacement cubitus")
         {
             other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
             other.gameObject.GetComponent<Outline>().enabled = false;
             GetComponent<MeshRenderer>().enabled = false;
+            GameManager.verification[2] = true;
         }
         else if (this.name == "Humerus a placer" && other.name == "Emplacement Humerus")
         {
             other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
             other.gameObject.GetComponent<Outline>().enabled = false;
             GetComponent<MeshRenderer>().enabled = false;
+            GameManager.verification[3] = true;
+        }
+        else if (this.name == "Crane a placer" && other.name == "Emplacement crane2")
+        {
+            other.gameObject.GetComponent<Outline>().enabled = false;
         }
     }
 }
