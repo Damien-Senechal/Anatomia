@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,6 +10,12 @@ public class DragObject : MonoBehaviour
     private Vector3 mOffset;
     private float mZCoord;
     public Material mMaterial;
+    public bool canGrab = false;
+
+    private void Start()
+    {
+        //Debug.Log(mMaterial);
+    }
 
     private void Update()
     {
@@ -17,14 +24,27 @@ public class DragObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if(canGrab)
         {
-            return;
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
+                mOffset = gameObject.transform.position - GetMouseWorldPos();
+                GetComponent<Rigidbody>().useGravity = false;
+                GetComponent<Rigidbody>().isKinematic = true;
+            }
         }
-        else
+    }
+
+    private void OnMouseUp()
+    {
+        if (canGrab)
         {
-            mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
-            mOffset = gameObject.transform.position - GetMouseWorldPos();
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                GetComponent<Rigidbody>().useGravity = true;
+                GetComponent<Rigidbody>().isKinematic = false;
+            }
         }
     }
 
@@ -39,20 +59,22 @@ public class DragObject : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if(canGrab)
         {
-            return;
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+            else
+            {
+                transform.position = GetMouseWorldPos() + mOffset;
+            }
         }
-        else
-        {
-            transform.position = GetMouseWorldPos() + mOffset;
-        }
-        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log(other.tag);
+        Debug.Log(this.name);
         if (this.name == "Femur a placer" && other.name == "Emplacement femur")
         {
             other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
@@ -84,6 +106,87 @@ public class DragObject : MonoBehaviour
         else if (this.name == "Crane a placer" && other.name == "Emplacement crane2")
         {
             other.gameObject.GetComponent<Outline>().enabled = false;
+        }
+        else if (this.name == "Lame" && other.name == "biceps gauche")
+        {
+            
+            other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
+            //other.gameObject.GetComponent<Outline>().enabled = false;
+            other.gameObject.GetComponent<DragObject>().canGrab = true;
+            other.gameObject.GetComponent<BoxCollider>().enabled = true;
+            other.gameObject.GetComponent<Rigidbody>().useGravity = true;
+        }
+        else if (this.name == "Lame" && other.name == "biceps droit")
+        {
+
+            other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
+            //other.gameObject.GetComponent<Outline>().enabled = false;
+            other.gameObject.GetComponent<DragObject>().canGrab = true;
+            other.gameObject.GetComponent<BoxCollider>().enabled = true;
+            other.gameObject.GetComponent<Rigidbody>().useGravity = true;
+        }
+        else if (this.name == "Lame" && other.name == "poignet gauche")
+        {
+
+            other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
+            //other.gameObject.GetComponent<Outline>().enabled = false;
+            other.gameObject.GetComponent<DragObject>().canGrab = true;
+            other.gameObject.GetComponent<BoxCollider>().enabled = true;
+            other.gameObject.GetComponent<Rigidbody>().useGravity = true;
+        }
+        else if (this.name == "Lame" && other.name == "poignet droite")
+        {
+
+            other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
+            //other.gameObject.GetComponent<Outline>().enabled = false;
+            other.gameObject.GetComponent<DragObject>().canGrab = true;
+            other.gameObject.GetComponent<BoxCollider>().enabled = true;
+            other.gameObject.GetComponent<Rigidbody>().useGravity = true;
+        }
+        else if (this.name == "Lame" && other.name == "tete")
+        {
+
+            other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
+            //other.gameObject.GetComponent<Outline>().enabled = false;
+            other.gameObject.GetComponent<DragObject>().canGrab = true;
+            other.gameObject.GetComponent<BoxCollider>().enabled = true;
+            other.gameObject.GetComponent<Rigidbody>().useGravity = true;
+        }
+        else if (this.name == "Lame" && other.name == "hanche gauche")
+        {
+
+            other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
+            //other.gameObject.GetComponent<Outline>().enabled = false;
+            other.gameObject.GetComponent<DragObject>().canGrab = true;
+            other.gameObject.GetComponent<BoxCollider>().enabled = true;
+            other.gameObject.GetComponent<Rigidbody>().useGravity = true;
+        }
+        else if (this.name == "Lame" && other.name == "hanche droite")
+        {
+
+            other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
+            //other.gameObject.GetComponent<Outline>().enabled = false;
+            other.gameObject.GetComponent<DragObject>().canGrab = true;
+            other.gameObject.GetComponent<BoxCollider>().enabled = true;
+            other.gameObject.GetComponent<Rigidbody>().useGravity = true;
+        }
+        else if (this.name == "Lame" && other.name == "mollet gauche")
+        {
+
+            other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
+            //other.gameObject.GetComponent<Outline>().enabled = false;
+            other.gameObject.GetComponent<DragObject>().canGrab = true;
+            other.gameObject.GetComponent<BoxCollider>().enabled = true;
+            other.gameObject.GetComponent<Rigidbody>().useGravity = true;
+        }
+        else if (this.name == "Lame" && other.name == "mollet droit")
+        {
+
+            other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
+            //other.gameObject.GetComponent<Outline>().enabled = false;
+            other.gameObject.GetComponent<DragObject>().canGrab = true;
+            other.gameObject.GetComponent<BoxCollider>().enabled = true;
+            other.gameObject.GetComponent<Rigidbody>().useGravity = true;
         }
     }
 }

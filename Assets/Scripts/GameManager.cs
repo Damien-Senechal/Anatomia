@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] levels;
     public GameObject[] canvas;
     public int actualCanvas = 0;
+    public int actualLevel = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
         }
         Debug.Log(canvas[actualCanvas]);
         canvas[actualCanvas].SetActive(true);
+        levels[actualLevel].SetActive(true);
     }
 
     // Update is called once per frame
@@ -76,8 +78,7 @@ public class GameManager : MonoBehaviour
             {
                 verification[i] = false;
             }
-            levels[0].SetActive(false);
-            nextCanvas();
+            StartCoroutine("endOfLevel");
         }
     }
 
@@ -105,5 +106,22 @@ public class GameManager : MonoBehaviour
         }
         actualCanvas++;
         canvas[actualCanvas].SetActive(true);
+    }
+
+    public void nextLevel()
+    {
+        if (levels[actualLevel].activeInHierarchy)
+        {
+            levels[actualLevel].SetActive(false);
+        }
+        actualLevel++;
+        levels[actualLevel].SetActive(true);
+    }
+
+    IEnumerator endOfLevel()
+    {
+        yield return new WaitForSeconds(2f);
+        levels[0].SetActive(false);
+        nextCanvas();
     }
 }

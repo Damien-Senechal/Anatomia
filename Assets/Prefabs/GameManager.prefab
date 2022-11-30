@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3295845034683851260}
+  - component: {fileID: 1688059377}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -23,11 +24,35 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2359586532455074605}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.87570786, y: 0.655269, z: 3.9216907}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: -0.3617113, y: 0.846, z: 3.416}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
+--- !u!114 &1688059377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2359586532455074605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8297d5636aa02a4589edbd8e4161a10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpCam: {fileID: 0}
+  DownCam: {fileID: 0}
+  check: 0
+  levels:
+  - {fileID: 0}
+  - {fileID: 0}
+  canvas:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  actualCanvas: 2
+  actualLevel: 1
