@@ -1,17 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject UpCam;
     public GameObject DownCam;
+    public GameObject ProfCam;
+    public GameObject UI;
     public static bool[] verification = new bool[] {false, false, false, false};
     public bool check = false;
     public GameObject[] levels;
     public GameObject[] canvas;
     public int actualCanvas = 0;
     public int actualLevel = 0;
+    public string[] objectifs = { 
+        "tete",
+        "mollet gauche",
+        "mollet droit",
+        "poignet gauche",
+        "biceps gauche",
+        "poignet droite",
+        "biceps droit",
+        "hanche gauche",
+        "hanche droite" 
+    };
+    public static string actualObjectif1;
+    public static string actualObjectif2;
+    public GameObject text;
 
     // Start is called before the first frame update
     void Start()
@@ -20,9 +38,10 @@ public class GameManager : MonoBehaviour
         {
             verification[i] = false;
         }
-        Debug.Log(canvas[actualCanvas]);
         canvas[actualCanvas].SetActive(true);
         levels[actualLevel].SetActive(true);
+        //Debug.Log(canvas[actualCanvas]);
+        //Debug.Log(text.GetComponent<TextMeshProUGUI>().text);
     }
 
     // Update is called once per frame
@@ -31,7 +50,7 @@ public class GameManager : MonoBehaviour
         //Debug.Log(Input.GetAxis("Mouse ScrollWheel"));
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            Debug.Log("Up");
+            //Debug.Log("Up");
             if (UpCam.activeInHierarchy == false)
             {
                 UpCam.SetActive(true);
@@ -43,7 +62,7 @@ public class GameManager : MonoBehaviour
         }
         else if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            Debug.Log("Down");
+            //Debug.Log("Down");
             if (UpCam.activeInHierarchy == true)
             {
                 UpCam.SetActive(false);
@@ -54,21 +73,39 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        
-        for (int i = 0; i < verification.Length; i++)
+        if(actualLevel == 0)
         {
-            if(verification[i] == false)
+            for (int i = 0; i < verification.Length; i++)
             {
-                check = false;
-                return;
-            }
-            else
-            {
-                check = true;
+                if (verification[i] == false)
+                {
+                    check = false;
+                    return;
+                }
+                else
+                {
+                    check = true;
+                }
             }
         }
+        else if(actualLevel == 1)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                if (verification[i] == false)
+                {
+                    check = false;
+                    return;
+                }
+                else
+                {
+                    check = true;
+                }
+            }
+        }
+        
 
-        //Debug.Log(check);
+        
 
         if(check)
         {
@@ -80,6 +117,7 @@ public class GameManager : MonoBehaviour
             }
             StartCoroutine("endOfLevel");
         }
+
     }
 
     public void displayCanvas()
@@ -87,6 +125,7 @@ public class GameManager : MonoBehaviour
         if (!canvas[actualCanvas].activeInHierarchy)
         {
             canvas[actualCanvas].SetActive(true);
+            UI.SetActive(false);
         }
     }
 
@@ -95,6 +134,17 @@ public class GameManager : MonoBehaviour
         if (canvas[actualCanvas].activeInHierarchy)
         {
             canvas[actualCanvas].SetActive(false);
+            UI.SetActive(true);
+            if(actualCanvas == 0)
+            {
+                DownCam.SetActive(true);
+                ProfCam.SetActive(false);
+            }
+        }
+        if(actualCanvas == 2)
+        {
+            ProfCam.SetActive(false);
+            DownCam.SetActive(true);
         }
     }
 
@@ -102,10 +152,22 @@ public class GameManager : MonoBehaviour
     {
         if(canvas[actualCanvas].activeInHierarchy)
         {
-            canvas[actualCanvas].SetActive(false);
+            hideCanvas();
         }
         actualCanvas++;
-        canvas[actualCanvas].SetActive(true);
+        displayCanvas();
+        if(actualCanvas == 2)
+        {
+            int rand1 = Random.Range(0, objectifs.Length);
+            int rand2 = rand1;
+            while(rand2 == rand1)
+            {
+                rand2 = Random.Range(0, objectifs.Length);
+            }
+            text.GetComponent<TextMeshProUGUI>().text = "Decouper les membres suivant : \n" + objectifs[rand1] + "\n" + objectifs[rand2];
+            actualObjectif1 = objectifs[rand1];
+            actualObjectif2 = objectifs[rand2];
+        }
     }
 
     public void nextLevel()
@@ -116,6 +178,10 @@ public class GameManager : MonoBehaviour
         }
         actualLevel++;
         levels[actualLevel].SetActive(true);
+        for (int i = 0; i < verification.Length; i++)
+        {
+            verification[i] = false;
+        }
     }
 
     IEnumerator endOfLevel()
@@ -123,5 +189,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         levels[0].SetActive(false);
         nextCanvas();
+        DownCam.SetActive(false);
+        ProfCam.SetActive(true);
     }
 }

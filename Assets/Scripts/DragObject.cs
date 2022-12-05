@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
@@ -11,10 +12,13 @@ public class DragObject : MonoBehaviour
     private float mZCoord;
     public Material mMaterial;
     public bool canGrab = false;
+    private Vector3 initialPosition;
+
 
     private void Start()
     {
         //Debug.Log(mMaterial);
+        initialPosition = transform.position;
     }
 
     private void Update()
@@ -74,7 +78,28 @@ public class DragObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(this.name);
+        if(other.name == "poubelle" && this.name == GameManager.actualObjectif1)
+        {
+            Debug.Log("ALLO1");
+            if (GameManager.verification[0] == false)
+            {
+                GameManager.verification[0] = true;
+            }
+        }
+        else if(other.name == "poubelle" && this.name == GameManager.actualObjectif2)
+        {
+            Debug.Log("ALLO2");
+            if (GameManager.verification[1] == false)
+            {
+                GameManager.verification[1] = true;
+            }
+        }
+        if(other.name == "GroundDetection")
+        {
+            transform.position = initialPosition+new Vector3(0,1,0);
+
+        }
+        //Debug.Log(this.name);
         if (this.name == "Femur a placer" && other.name == "Emplacement femur")
         {
             other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
