@@ -134,12 +134,18 @@ public class DragObject : MonoBehaviour
         }
         else if (this.name == "Lame" && other.name == "biceps gauche")
         {
-            
-            other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
-            //other.gameObject.GetComponent<Outline>().enabled = false;
-            other.gameObject.GetComponent<DragObject>().canGrab = true;
-            other.gameObject.GetComponent<BoxCollider>().enabled = true;
-            other.gameObject.GetComponent<Rigidbody>().useGravity = true;
+            if(GameManager.actualLevel == 2)
+            {
+
+            }
+            else if(GameManager.actualLevel == 1)
+            {
+                other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
+                //other.gameObject.GetComponent<Outline>().enabled = false;
+                other.gameObject.GetComponent<DragObject>().canGrab = true;
+                other.gameObject.GetComponent<BoxCollider>().enabled = true;
+                other.gameObject.GetComponent<Rigidbody>().useGravity = true;
+            }
         }
         else if (this.name == "Lame" && other.name == "biceps droit")
         {

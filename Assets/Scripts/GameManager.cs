@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] levels;
     public GameObject[] canvas;
     public int actualCanvas = 0;
-    public int actualLevel = 0;
+    public static int actualLevel = 0;
     public string[] objectifs = { 
         "tete",
         "mollet gauche",
@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
         "hanche gauche",
         "hanche droite" 
     };
+    public GameObject[] bonesmesh;
     public static string actualObjectif1;
     public static string actualObjectif2;
     public GameObject text;
