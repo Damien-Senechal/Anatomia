@@ -13,12 +13,14 @@ public class DragObject : MonoBehaviour
     public Material mMaterial;
     public bool canGrab = false;
     private Vector3 initialPosition;
+    public GameManager gameManager;
 
 
     private void Start()
     {
         //Debug.Log(mMaterial);
         initialPosition = transform.position;
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void Update()
@@ -28,16 +30,28 @@ public class DragObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(canGrab)
+        if(gameManager.getActualLevel() == 2 && tag == "tozoom")
         {
-            if (!EventSystem.current.IsPointerOverGameObject())
+            if(name == "tete")
             {
-                mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
-                mOffset = gameObject.transform.position - GetMouseWorldPos();
-                GetComponent<Rigidbody>().useGravity = false;
-                GetComponent<Rigidbody>().isKinematic = true;
+                gameManager.DownCam.transform.localPosition = new Vector3(-0.87f, 1.272f+0.1f, 3.165f);
+            }
+            //gameManager.DownCam.transform.localPosition = transform.localPosition + new Vector3(0,.5f,0);
+        }
+        else
+        {
+            if (canGrab)
+            {
+                if (!EventSystem.current.IsPointerOverGameObject())
+                {
+                    mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
+                    mOffset = gameObject.transform.position - GetMouseWorldPos();
+                    GetComponent<Rigidbody>().useGravity = false;
+                    GetComponent<Rigidbody>().isKinematic = true;
+                }
             }
         }
+        
     }
 
     private void OnMouseUp()
@@ -96,7 +110,8 @@ public class DragObject : MonoBehaviour
         }
         if(other.name == "GroundDetection")
         {
-            transform.position = initialPosition+new Vector3(0,1,0);
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            transform.position = initialPosition+new Vector3(0,.5f,0);
 
         }
         //Debug.Log(this.name);
@@ -134,11 +149,11 @@ public class DragObject : MonoBehaviour
         }
         else if (this.name == "Lame" && other.name == "biceps gauche")
         {
-            if(GameManager.actualLevel == 2)
+            if(gameManager.getActualLevel() == 2)
             {
 
             }
-            else if(GameManager.actualLevel == 1)
+            else if(gameManager.actualLevel == 1)
             {
                 other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
                 //other.gameObject.GetComponent<Outline>().enabled = false;

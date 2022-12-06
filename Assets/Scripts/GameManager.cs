@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] levels;
     public GameObject[] canvas;
     public int actualCanvas = 0;
-    public static int actualLevel = 0;
+    public int actualLevel = 0;
     public string[] objectifs = { 
         "tete",
         "mollet gauche",
@@ -27,10 +27,24 @@ public class GameManager : MonoBehaviour
         "hanche gauche",
         "hanche droite" 
     };
+    public string[] nomOs =
+    {
+        "crane",
+        "cubitus droit",
+        "cubitus gauche",
+        "humerus droit",
+        "humerus gauche",
+        "femur droit",
+        "femur gauche",
+        "tibia droit",
+        "tibia gauche",
+
+    };
     public GameObject[] bonesmesh;
     public static string actualObjectif1;
     public static string actualObjectif2;
-    public GameObject text;
+    public GameObject text1;
+    public GameObject text2;
 
     // Start is called before the first frame update
     void Start()
@@ -142,7 +156,7 @@ public class GameManager : MonoBehaviour
                 ProfCam.SetActive(false);
             }
         }
-        if(actualCanvas == 2)
+        if(actualCanvas == 2 || actualCanvas == 4)
         {
             ProfCam.SetActive(false);
             DownCam.SetActive(true);
@@ -165,9 +179,21 @@ public class GameManager : MonoBehaviour
             {
                 rand2 = Random.Range(0, objectifs.Length);
             }
-            text.GetComponent<TextMeshProUGUI>().text = "Decouper les membres suivant : \n" + objectifs[rand1] + "\n" + objectifs[rand2];
+            text1.GetComponent<TextMeshProUGUI>().text = "Decouper les membres suivant : \n" + objectifs[rand1] + "\n" + objectifs[rand2];
             actualObjectif1 = objectifs[rand1];
             actualObjectif2 = objectifs[rand2];
+        }
+        else if(actualCanvas == 4)
+        {
+            int rand1 = Random.Range(0, nomOs.Length);
+            int rand2 = rand1;
+            while (rand2 == rand1)
+            {
+                rand2 = Random.Range(0, nomOs.Length);
+            }
+            text2.GetComponent<TextMeshProUGUI>().text = "Decouper les membres suivant : \n" + nomOs[rand1] + "\n" + nomOs[rand2];
+            actualObjectif1 = nomOs[rand1];
+            actualObjectif2 = nomOs[rand2];
         }
     }
 
@@ -183,6 +209,16 @@ public class GameManager : MonoBehaviour
         {
             verification[i] = false;
         }
+    }
+
+    public int getActualLevel()
+    {
+        return actualLevel;
+    }
+
+    public int getActualCanvas()
+    {
+        return actualCanvas;
     }
 
     IEnumerator endOfLevel()
