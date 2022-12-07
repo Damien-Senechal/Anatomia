@@ -36,56 +36,19 @@ public class DragObject : MonoBehaviour
             GameManager.inZoom = true;
             gameManager.DownCam.transform.position = repere.transform.position + new Vector3(0, 0.5f, 0);
             gameManager.sclapel.transform.position = repere.transform.position + new Vector3(0.1f, 0.1f, 0);
-            /*if (name == "tete")
-            {
-                
-            }
-            else if (name == "biceps droit")
-            {
-                gameManager.DownCam.transform.position = new Vector3(-1.11099994f, 0.875f + 0.5f, 3.48600006f);
-                gameManager.sclapel.transform.position = new Vector3(-1.11099994f + 0.1f, 0.875f + 0.1f, 3.48600006f);
-            }
-            else if (name == "biceps gauche")
-            {
-                gameManager.DownCam.transform.position = new Vector3(-0.629000008f, 0.875f + 0.5f, 3.48600006f);
-                gameManager.sclapel.transform.position = new Vector3(-0.629000008f + 0.1f, 0.875f + 0.1f, 3.48600006f);
-            }
-            else if (name == "poignet droite")
-            {
-                gameManager.DownCam.transform.position = new Vector3(-1.21300006f, 0.875f + 0.5f, 3.6329999f);
-                gameManager.sclapel.transform.position = new Vector3(-1.21300006f + 0.1f, 0.875f + 0.1f, 3.6329999f);
-            }
-            else if (name == "poignet gauche")
-            {
-                gameManager.DownCam.transform.position = new Vector3(-0.531000018f, 0.875f + 0.5f, 3.6329999f);
-                gameManager.sclapel.transform.position = new Vector3(-0.531000018f + 0.1f, 0.875f + 0.1f, 3.6329999f);
-            }
-            else if (name == "hanche droite")
-            {
-                gameManager.DownCam.transform.position = new Vector3(-0.967000008f, 0.875f + 0.5f, 4.02799988f);
-                gameManager.sclapel.transform.position = new Vector3(-0.967000008f + 0.1f, 0.875f + 0.1f, 4.02799988f);
-            }
-            else if (name == "hanche gauche")
-            {
-                gameManager.DownCam.transform.position = new Vector3(-0.764999986f, 0.875f + 0.5f, 4.02799988f);
-                gameManager.sclapel.transform.position = new Vector3(-0.764999986f + 0.1f, 0.875f + 0.1f, 4.02799988f);
-            }
-            else if (name == "mollet droit")
-            {
-                gameManager.DownCam.transform.position = new Vector3(-1.01999998f, 0.875f + 0.5f, 4.32200003f);
-                gameManager.sclapel.transform.position = new Vector3(-1.01999998f + 0.1f, 0.875f + 0.1f, 4.32200003f);
-            }
-            else if (name == "mollet gauche")
-            {
-                gameManager.DownCam.transform.position = new Vector3(-0.720000029f, 0.875f + 0.5f, 4.32200003f);
-                gameManager.sclapel.transform.position = new Vector3(-0.720000029f + 0.1f, 0.875f + 0.1f, 4.32200003f);
-            }*/
-            //gameManager.DownCam.transform.position = transform.position + new Vector3(0, .5f, 0);
         }
         else
         {
             if (canGrab)
             {
+                if(name == "scie")
+                {
+                    if(transform.localEulerAngles.y != 270)
+                    {
+                        transform.Rotate(0, 0, 90);
+                    }
+                    transform.position += new Vector3(0, .5f, 0);
+                }
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
                     mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
@@ -102,6 +65,10 @@ public class DragObject : MonoBehaviour
     {
         if (canGrab)
         {
+            if(name == "scie")
+            {
+                transform.position -= new Vector3(0, .5f, 0);
+            }
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 GetComponent<Rigidbody>().useGravity = true;
@@ -283,9 +250,64 @@ public class DragObject : MonoBehaviour
 
             other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
             //other.gameObject.GetComponent<Outline>().enabled = false;
-            other.gameObject.GetComponent<DragObject>().canGrab = true;
-            other.gameObject.GetComponent<BoxCollider>().enabled = true;
-            other.gameObject.GetComponent<Rigidbody>().useGravity = true;
+            gameManager.activeMesh(2);
+            other.tag = "Untagged";
+        }
+        else if (this.name == "scalpel" && other.name == "biceps gauche")
+        {
+
+            other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
+            //other.gameObject.GetComponent<Outline>().enabled = false;
+            gameManager.activeMesh(2);
+            other.tag = "Untagged";
+        }
+        else if (this.name == "scalpel" && other.name == "poignet droit")
+        {
+
+            other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
+            //other.gameObject.GetComponent<Outline>().enabled = false;
+            gameManager.activeMesh(2);
+            other.tag = "Untagged";
+        }
+        else if (this.name == "scalpel" && other.name == "poignet gauche")
+        {
+
+            other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
+            //other.gameObject.GetComponent<Outline>().enabled = false;
+            gameManager.activeMesh(2);
+            other.tag = "Untagged";
+        }
+        else if (this.name == "scalpel" && other.name == "hanche droite")
+        {
+
+            other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
+            //other.gameObject.GetComponent<Outline>().enabled = false;
+            gameManager.activeMesh(2);
+            other.tag = "Untagged";
+        }
+        else if (this.name == "scalpel" && other.name == "hanche gauche")
+        {
+
+            other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
+            //other.gameObject.GetComponent<Outline>().enabled = false;
+            gameManager.activeMesh(2);
+            other.tag = "Untagged";
+        }
+        else if (this.name == "scalpel" && other.name == "mollet droit")
+        {
+
+            other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
+            //other.gameObject.GetComponent<Outline>().enabled = false;
+            gameManager.activeMesh(2);
+            other.tag = "Untagged";
+        }
+        else if (this.name == "scalpel" && other.name == "mollet gauche")
+        {
+
+            other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
+            //other.gameObject.GetComponent<Outline>().enabled = false;
+            gameManager.activeMesh(2);
+            other.tag = "Untagged";
         }
     }
 }

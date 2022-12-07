@@ -239,4 +239,9 @@ public class GameManager : MonoBehaviour
         DownCam.SetActive(false);
         ProfCam.SetActive(true);
     }
+
+    public void activeMesh(int x)
+    {
+        bonesmesh[x].SetActive(true);
+    }
 }
