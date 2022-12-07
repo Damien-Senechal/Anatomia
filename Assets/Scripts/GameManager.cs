@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     public static string actualObjectif2;
     public GameObject text1;
     public GameObject text2;
+    public static bool inZoom = false;
 
     // Start is called before the first frame update
     void Start()
@@ -65,14 +66,22 @@ public class GameManager : MonoBehaviour
         //Debug.Log(Input.GetAxis("Mouse ScrollWheel"));
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            //Debug.Log("Up");
-            if (UpCam.activeInHierarchy == false)
+            if(inZoom)
             {
-                UpCam.SetActive(true);
+                DownCam.transform.position = new Vector3(-0.874000013f, 2.5f, 3.96000004f);
+                inZoom = false;
             }
-            if (DownCam.activeInHierarchy == true)
+            else
             {
-                DownCam.SetActive(false);
+                //Debug.Log("Up");
+                if (UpCam.activeInHierarchy == false)
+                {
+                    UpCam.SetActive(true);
+                }
+                if (DownCam.activeInHierarchy == true)
+                {
+                    DownCam.SetActive(false);
+                }
             }
         }
         else if (Input.GetAxis("Mouse ScrollWheel") > 0)

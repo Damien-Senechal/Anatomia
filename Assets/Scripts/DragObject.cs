@@ -32,11 +32,44 @@ public class DragObject : MonoBehaviour
     {
         if(gameManager.getActualLevel() == 2 && tag == "tozoom")
         {
+            GameManager.inZoom = true;
             if(name == "tete")
             {
-                gameManager.DownCam.transform.localPosition = new Vector3(-0.87f, 1.272f+0.1f, 3.165f);
+                gameManager.DownCam.transform.localPosition = new Vector3(-0.878000021f, 0.875f+0.5f, 3.19400001f);
             }
-            //gameManager.DownCam.transform.localPosition = transform.localPosition + new Vector3(0,.5f,0);
+            else if (name == "biceps droit")
+            {
+                gameManager.DownCam.transform.localPosition = new Vector3(-1.11099994f, 0.875f + 0.5f, 3.48600006f);
+            }
+            else if (name == "biceps gauche")
+            {
+                gameManager.DownCam.transform.localPosition = new Vector3(-0.629000008f, 0.875f + 0.5f, 3.48600006f);
+            }
+            else if (name == "poignet droite")
+            {
+                gameManager.DownCam.transform.localPosition = new Vector3(-1.21300006f, 0.875f + 0.5f, 3.6329999f);
+            }
+            else if (name == "poignet gauche")
+            {
+                gameManager.DownCam.transform.localPosition = new Vector3(-0.531000018f, 0.875f + 0.5f, 3.6329999f);
+            }
+            else if (name == "hanche droite")
+            {
+                gameManager.DownCam.transform.localPosition = new Vector3(-0.967000008f, 0.875f + 0.5f, 4.02799988f);
+            }
+            else if (name == "hanche gauche")
+            {
+                gameManager.DownCam.transform.localPosition = new Vector3(-0.764999986f, 0.875f + 0.5f, 4.02799988f);
+            }
+            else if (name == "mollet droit")
+            {
+                gameManager.DownCam.transform.localPosition = new Vector3(-1.01999998f, 0.875f + 0.5f, 4.32200003f);
+            }
+            else if (name == "mollet gauche")
+            {
+                gameManager.DownCam.transform.localPosition = new Vector3(-0.720000029f, 0.875f + 0.5f, 4.32200003f);
+            }
+            //gameManager.DownCam.transform.position = transform.position + new Vector3(0, .5f, 0);
         }
         else
         {
