@@ -14,6 +14,7 @@ public class DragObject : MonoBehaviour
     public bool canGrab = false;
     private Vector3 initialPosition;
     public GameManager gameManager;
+    public GameObject repere;
 
 
     private void Start()
@@ -33,42 +34,52 @@ public class DragObject : MonoBehaviour
         if(gameManager.getActualLevel() == 2 && tag == "tozoom")
         {
             GameManager.inZoom = true;
-            if(name == "tete")
+            gameManager.DownCam.transform.position = repere.transform.position + new Vector3(0, 0.5f, 0);
+            gameManager.sclapel.transform.position = repere.transform.position + new Vector3(0.1f, 0.1f, 0);
+            /*if (name == "tete")
             {
-                gameManager.DownCam.transform.localPosition = new Vector3(-0.878000021f, 0.875f+0.5f, 3.19400001f);
+                
             }
             else if (name == "biceps droit")
             {
-                gameManager.DownCam.transform.localPosition = new Vector3(-1.11099994f, 0.875f + 0.5f, 3.48600006f);
+                gameManager.DownCam.transform.position = new Vector3(-1.11099994f, 0.875f + 0.5f, 3.48600006f);
+                gameManager.sclapel.transform.position = new Vector3(-1.11099994f + 0.1f, 0.875f + 0.1f, 3.48600006f);
             }
             else if (name == "biceps gauche")
             {
-                gameManager.DownCam.transform.localPosition = new Vector3(-0.629000008f, 0.875f + 0.5f, 3.48600006f);
+                gameManager.DownCam.transform.position = new Vector3(-0.629000008f, 0.875f + 0.5f, 3.48600006f);
+                gameManager.sclapel.transform.position = new Vector3(-0.629000008f + 0.1f, 0.875f + 0.1f, 3.48600006f);
             }
             else if (name == "poignet droite")
             {
-                gameManager.DownCam.transform.localPosition = new Vector3(-1.21300006f, 0.875f + 0.5f, 3.6329999f);
+                gameManager.DownCam.transform.position = new Vector3(-1.21300006f, 0.875f + 0.5f, 3.6329999f);
+                gameManager.sclapel.transform.position = new Vector3(-1.21300006f + 0.1f, 0.875f + 0.1f, 3.6329999f);
             }
             else if (name == "poignet gauche")
             {
-                gameManager.DownCam.transform.localPosition = new Vector3(-0.531000018f, 0.875f + 0.5f, 3.6329999f);
+                gameManager.DownCam.transform.position = new Vector3(-0.531000018f, 0.875f + 0.5f, 3.6329999f);
+                gameManager.sclapel.transform.position = new Vector3(-0.531000018f + 0.1f, 0.875f + 0.1f, 3.6329999f);
             }
             else if (name == "hanche droite")
             {
-                gameManager.DownCam.transform.localPosition = new Vector3(-0.967000008f, 0.875f + 0.5f, 4.02799988f);
+                gameManager.DownCam.transform.position = new Vector3(-0.967000008f, 0.875f + 0.5f, 4.02799988f);
+                gameManager.sclapel.transform.position = new Vector3(-0.967000008f + 0.1f, 0.875f + 0.1f, 4.02799988f);
             }
             else if (name == "hanche gauche")
             {
-                gameManager.DownCam.transform.localPosition = new Vector3(-0.764999986f, 0.875f + 0.5f, 4.02799988f);
+                gameManager.DownCam.transform.position = new Vector3(-0.764999986f, 0.875f + 0.5f, 4.02799988f);
+                gameManager.sclapel.transform.position = new Vector3(-0.764999986f + 0.1f, 0.875f + 0.1f, 4.02799988f);
             }
             else if (name == "mollet droit")
             {
-                gameManager.DownCam.transform.localPosition = new Vector3(-1.01999998f, 0.875f + 0.5f, 4.32200003f);
+                gameManager.DownCam.transform.position = new Vector3(-1.01999998f, 0.875f + 0.5f, 4.32200003f);
+                gameManager.sclapel.transform.position = new Vector3(-1.01999998f + 0.1f, 0.875f + 0.1f, 4.32200003f);
             }
             else if (name == "mollet gauche")
             {
-                gameManager.DownCam.transform.localPosition = new Vector3(-0.720000029f, 0.875f + 0.5f, 4.32200003f);
-            }
+                gameManager.DownCam.transform.position = new Vector3(-0.720000029f, 0.875f + 0.5f, 4.32200003f);
+                gameManager.sclapel.transform.position = new Vector3(-0.720000029f + 0.1f, 0.875f + 0.1f, 4.32200003f);
+            }*/
             //gameManager.DownCam.transform.position = transform.position + new Vector3(0, .5f, 0);
         }
         else
@@ -259,6 +270,15 @@ public class DragObject : MonoBehaviour
             other.gameObject.GetComponent<Rigidbody>().useGravity = true;
         }
         else if (this.name == "Lame" && other.name == "mollet droit")
+        {
+
+            other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
+            //other.gameObject.GetComponent<Outline>().enabled = false;
+            other.gameObject.GetComponent<DragObject>().canGrab = true;
+            other.gameObject.GetComponent<BoxCollider>().enabled = true;
+            other.gameObject.GetComponent<Rigidbody>().useGravity = true;
+        }
+        else if (this.name == "scalpel" && other.name == "biceps droit")
         {
 
             other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;

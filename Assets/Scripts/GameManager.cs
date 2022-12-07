@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     public GameObject text1;
     public GameObject text2;
     public static bool inZoom = false;
+    public GameObject sclapel;
 
     // Start is called before the first frame update
     void Start()
