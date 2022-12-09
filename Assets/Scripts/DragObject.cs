@@ -15,6 +15,7 @@ public class DragObject : MonoBehaviour
     private Vector3 initialPosition;
     public GameManager gameManager;
     public GameObject repere;
+    public Vector3 scaleToHave;
 
 
     private void Start()
@@ -31,6 +32,11 @@ public class DragObject : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if(scaleToHave != Vector3.zero)
+        {
+            transform.localScale = scaleToHave;
+            scaleToHave = Vector3.zero;
+        }
         if(gameManager.getActualLevel() == 2 && tag == "tozoom")
         {
             GameManager.inZoom = true;
@@ -48,6 +54,13 @@ public class DragObject : MonoBehaviour
                         transform.Rotate(0, 0, 90);
                     }
                     transform.position += new Vector3(0, .5f, 0);
+                }
+                else if(name == "scalpel")
+                {
+                    if (transform.localEulerAngles.y != -45)
+                    {
+                        transform.Rotate(-90, 0, 45);
+                    }
                 }
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {

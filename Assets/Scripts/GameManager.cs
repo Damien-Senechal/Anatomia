@@ -219,6 +219,13 @@ public class GameManager : MonoBehaviour
         {
             verification[i] = false;
         }
+        if(actualLevel == 1)
+        {
+            DownCam.GetComponent<Camera>().orthographicSize = 0.47f;
+            DownCam.transform.position = new Vector3(-1.01900005f, 1.86399996f, 3.98099995f);
+        }
+        
+
     }
 
     public int getActualLevel()
