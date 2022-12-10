@@ -20,6 +20,7 @@ public class DragObject : MonoBehaviour
     public string textToScreen;
     private Vector3 previousSize;
     private GameObject objetText;
+    private int Malus = 0;
 
 
     private void Start()
@@ -40,23 +41,32 @@ public class DragObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(objetText && !objetText.activeInHierarchy)
+        if (Text != null)
         {
-            objetText.SetActive(true);
-        }
-        else
-        {
-            objetText = Instantiate(Text, transform.position, transform.rotation);
-            objetText.transform.Rotate(0, 180, 90);
-            objetText.GetComponent<TextMesh>().text = textToScreen;
+
+            if (objetText && !objetText.activeInHierarchy)
+            {
+                objetText.SetActive(true);
+            }
+            else
+            {
+                objetText = Instantiate(Text, transform.position, transform.rotation);
+                objetText.transform.Rotate(0, 180, 90);
+                objetText.GetComponent<TextMesh>().text = textToScreen;
+            }
         }
         
 
         if(scaleToHave != Vector3.zero)
         {
             transform.localScale = scaleToHave;
-            scaleToHave = Vector3.zero;
+            //scaleToHave = Vector3.zero;
         }
+        if(gameManager.actualLevel == 0)
+        {
+            transform.position += new Vector3(0, 0.28481f, 0);
+        }
+        
         if(gameManager.getActualLevel() == 2 && tag == "tozoom")
         {
             GameManager.inZoom = true;
@@ -96,11 +106,17 @@ public class DragObject : MonoBehaviour
 
     private void OnMouseUp()
     {
-        objetText.SetActive(false);
+        transform.localScale = previousSize;
+        if(objetText)
+        {
+            objetText.SetActive(false);
+        }
+        
         if (canGrab)
         {
             if(name == "scie")
             {
+                //transform.Rotate(0, 0, -90);
                 transform.position -= new Vector3(0, .5f, 0);
             }
             if (!EventSystem.current.IsPointerOverGameObject())
@@ -200,6 +216,7 @@ public class DragObject : MonoBehaviour
             }
             else if(gameManager.actualLevel == 1)
             {
+
                 other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
                 //other.gameObject.GetComponent<Outline>().enabled = false;
                 other.gameObject.GetComponent<DragObject>().canGrab = true;

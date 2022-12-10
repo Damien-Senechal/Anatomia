@@ -266,4 +266,15 @@ public class GameManager : MonoBehaviour
     {
         bonesmesh[x].SetActive(true);
     }
+
+    public void endOfTheGame()
+    {
+        canvas[actualCanvas].SetActive(false);
+        canvas[5].SetActive(true);
+    }
+
+    public void exitTheGame()
+    {
+        Application.Quit();
+    }
 }
