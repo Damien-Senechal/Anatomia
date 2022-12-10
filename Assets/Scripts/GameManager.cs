@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     public static bool inZoom = false;
     public GameObject sclapel;
     private float difference;
+    public GameObject menuPause;
 
     // Start is called before the first frame update
     void Start()
@@ -276,5 +277,19 @@ public class GameManager : MonoBehaviour
     public void exitTheGame()
     {
         Application.Quit();
+    }
+
+    public void pauseTheGame()
+    {
+        if(menuPause.activeInHierarchy)
+        {
+            //displayCanvas();
+            menuPause.SetActive(false);
+        }
+        else
+        {
+            //hideCanvas();
+            menuPause.SetActive(true);
+        }
     }
 }

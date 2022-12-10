@@ -41,63 +41,66 @@ public class DragObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (Text != null)
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-
-            if (objetText && !objetText.activeInHierarchy)
+            if (Text != null)
             {
-                objetText.SetActive(true);
+
+                if (objetText && !objetText.activeInHierarchy)
+                {
+                    objetText.SetActive(true);
+                }
+                else
+                {
+                    objetText = Instantiate(Text, transform.position, transform.rotation);
+                    objetText.transform.Rotate(0, 180, 90);
+                    objetText.GetComponent<TextMesh>().text = textToScreen;
+                }
+            }
+
+
+            if (scaleToHave != Vector3.zero)
+            {
+                transform.localScale = scaleToHave;
+                //scaleToHave = Vector3.zero;
+            }
+            if (gameManager.actualLevel == 0)
+            {
+                transform.position += new Vector3(0, 0.28481f, 0);
+            }
+
+            if (gameManager.getActualLevel() == 2 && tag == "tozoom")
+            {
+                GameManager.inZoom = true;
+                gameManager.DownCam.transform.position = repere.transform.position + new Vector3(0, 0.5f, 0);
+                gameManager.sclapel.transform.position = repere.transform.position + new Vector3(0.1f, 0.1f, 0);
             }
             else
             {
-                objetText = Instantiate(Text, transform.position, transform.rotation);
-                objetText.transform.Rotate(0, 180, 90);
-                objetText.GetComponent<TextMesh>().text = textToScreen;
-            }
-        }
-        
-
-        if(scaleToHave != Vector3.zero)
-        {
-            transform.localScale = scaleToHave;
-            //scaleToHave = Vector3.zero;
-        }
-        if(gameManager.actualLevel == 0)
-        {
-            transform.position += new Vector3(0, 0.28481f, 0);
-        }
-        
-        if(gameManager.getActualLevel() == 2 && tag == "tozoom")
-        {
-            GameManager.inZoom = true;
-            gameManager.DownCam.transform.position = repere.transform.position + new Vector3(0, 0.5f, 0);
-            gameManager.sclapel.transform.position = repere.transform.position + new Vector3(0.1f, 0.1f, 0);
-        }
-        else
-        {
-            if (canGrab)
-            {
-                if(name == "scie")
+                if (canGrab)
                 {
-                    if(transform.localEulerAngles.y != 270)
+                    if (name == "scie")
                     {
-                        transform.Rotate(0, 0, 90);
+                        if (transform.localEulerAngles.y != 270)
+                        {
+                            transform.Rotate(0, 0, 90);
+                        }
+                        transform.position += new Vector3(0, .5f, 0);
                     }
-                    transform.position += new Vector3(0, .5f, 0);
-                }
-                else if(name == "scalpel")
-                {
-                    if (transform.localEulerAngles.y != -45)
+                    else if (name == "scalpel")
                     {
-                        transform.Rotate(-90, 0, 45);
+                        if (transform.localEulerAngles.y != -45)
+                        {
+                            transform.Rotate(-90, 0, 45);
+                        }
                     }
-                }
-                if (!EventSystem.current.IsPointerOverGameObject())
-                {
-                    mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
-                    mOffset = gameObject.transform.position - GetMouseWorldPos();
-                    GetComponent<Rigidbody>().useGravity = false;
-                    GetComponent<Rigidbody>().isKinematic = true;
+                    if (!EventSystem.current.IsPointerOverGameObject())
+                    {
+                        mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
+                        mOffset = gameObject.transform.position - GetMouseWorldPos();
+                        GetComponent<Rigidbody>().useGravity = false;
+                        GetComponent<Rigidbody>().isKinematic = true;
+                    }
                 }
             }
         }
