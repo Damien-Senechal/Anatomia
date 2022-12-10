@@ -20,6 +20,23 @@ public class Menu : MonoBehaviour
 
     public void Play()
     {
+        StartCoroutine(LaunchGame(1));
+    }
+
+    public void Exit()
+    {
+
+    }
+    
+    IEnumerator LaunchGame(int x)
+    {
+        yield return new WaitForSeconds(x);
         SceneManager.LoadScene(1);
+    }
+
+    IEnumerator ExitGame(int x)
+    {
+        yield return new WaitForSeconds(x);
+        Application.Quit();
     }
 }

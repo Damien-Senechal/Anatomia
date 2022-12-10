@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     public GameObject text2;
     public static bool inZoom = false;
     public GameObject sclapel;
+    private float difference;
 
     // Start is called before the first frame update
     void Start()
@@ -64,8 +65,22 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.touchCount == 2)
+        {
+            Touch touchZero = Input.GetTouch(0);
+            Touch touchOne = Input.GetTouch(1);
+
+            Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+            Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+
+            float prevMagnitude = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+            float currentMagnitude = (touchZero.position - touchOne.position).magnitude;
+
+            difference = currentMagnitude - prevMagnitude;
+        }
+
         //Debug.Log(Input.GetAxis("Mouse ScrollWheel"));
-        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        if (difference < 0)
         {
             if(inZoom)
             {
@@ -85,7 +100,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        else if (difference > 0)
         {
             //Debug.Log("Down");
             if (UpCam.activeInHierarchy == true)
