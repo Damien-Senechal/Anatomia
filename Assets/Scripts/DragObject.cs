@@ -16,6 +16,10 @@ public class DragObject : MonoBehaviour
     public GameManager gameManager;
     public GameObject repere;
     public Vector3 scaleToHave;
+    public GameObject Text;
+    public string textToScreen;
+    private Vector3 previousSize;
+    private GameObject objetText;
 
 
     private void Start()
@@ -23,15 +27,31 @@ public class DragObject : MonoBehaviour
         //Debug.Log(mMaterial);
         initialPosition = transform.position;
         gameManager = FindObjectOfType<GameManager>();
+        previousSize = transform.localScale;
     }
 
     private void Update()
     {
-
+        if(objetText)
+        {
+            objetText.transform.position = transform.position + Vector3.right * 0.15f;
+        }
     }
 
     private void OnMouseDown()
     {
+        if(objetText && !objetText.activeInHierarchy)
+        {
+            objetText.SetActive(true);
+        }
+        else
+        {
+            objetText = Instantiate(Text, transform.position, transform.rotation);
+            objetText.transform.Rotate(0, 180, 90);
+            objetText.GetComponent<TextMesh>().text = textToScreen;
+        }
+        
+
         if(scaleToHave != Vector3.zero)
         {
             transform.localScale = scaleToHave;
@@ -76,6 +96,7 @@ public class DragObject : MonoBehaviour
 
     private void OnMouseUp()
     {
+        objetText.SetActive(false);
         if (canGrab)
         {
             if(name == "scie")
