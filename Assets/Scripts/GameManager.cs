@@ -49,6 +49,9 @@ public class GameManager : MonoBehaviour
     public GameObject sclapel;
     private float difference;
     public GameObject menuPause;
+    public GameObject Schema;
+    public GameObject Schema2;
+    public int Malus = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -293,6 +296,32 @@ public class GameManager : MonoBehaviour
         {
             //hideCanvas();
             menuPause.SetActive(true);
+        }
+    }
+
+    public void afficherSchema()
+    {
+        if(actualLevel == 0)
+        {
+            if(Schema.activeInHierarchy)
+            {
+                Schema.SetActive(false);
+            }
+            else
+            {
+                Schema.SetActive(true);
+            }
+        }
+        else if(actualLevel == 1)
+        {
+            if (Schema2.activeInHierarchy)
+            {
+                Schema2.SetActive(false);
+            }
+            else
+            {
+                Schema2.SetActive(true);
+            }
         }
     }
 }

@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
 --- !u!23 &9211300852545698011
 MeshRenderer:
@@ -96,4 +96,4 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: 949ecfda325cfea4e9b6882147f64985, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4278848010
+    rgba: 4294967295

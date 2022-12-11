@@ -20,7 +20,6 @@ public class DragObject : MonoBehaviour
     public string textToScreen;
     private Vector3 previousSize;
     private GameObject objetText;
-    private int Malus = 0;
 
 
     private void Start()
