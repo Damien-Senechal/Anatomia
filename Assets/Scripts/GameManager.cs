@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
     public GameObject Schema;
     public GameObject Schema2;
     public int Malus = 0;
+    public GameObject skeleton;
+    public GameObject textObjectif;
 
     // Start is called before the first frame update
     void Start()
@@ -69,7 +71,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.touchCount == 2)
+        if(Malus/2 > 3)
+        {
+            exitTheGame();
+        }
+        if (Input.touchCount == 2)
         {
             Touch touchZero = Input.GetTouch(0);
             Touch touchOne = Input.GetTouch(1);
@@ -211,7 +217,7 @@ public class GameManager : MonoBehaviour
             {
                 rand2 = Random.Range(0, objectifs.Length);
             }
-            text1.GetComponent<TextMeshProUGUI>().text = "Decouper les membres suivant : \n" + objectifs[rand1] + "\n" + objectifs[rand2];
+            text1.GetComponent<TextMeshProUGUI>().text = "Cut the following members : \n" + objectifs[rand1] + "\n" + objectifs[rand2];
             actualObjectif1 = objectifs[rand1];
             actualObjectif2 = objectifs[rand2];
         }
@@ -223,7 +229,7 @@ public class GameManager : MonoBehaviour
             {
                 rand2 = Random.Range(0, nomOs.Length);
             }
-            text2.GetComponent<TextMeshProUGUI>().text = "Decouper les membres suivant : \n" + nomOs[rand1] + "\n" + nomOs[rand2];
+            text2.GetComponent<TextMeshProUGUI>().text = "Cut the following members : \n" + nomOs[rand1] + "\n" + nomOs[rand2];
             actualObjectif1 = nomOs[rand1];
             actualObjectif2 = nomOs[rand2];
         }
@@ -245,6 +251,7 @@ public class GameManager : MonoBehaviour
         {
             DownCam.GetComponent<Camera>().orthographicSize = 0.47f;
             DownCam.transform.position = new Vector3(-1.01900005f, 1.86399996f, 3.98099995f);
+            textObjectif.GetComponent<TextMeshProUGUI>().text = "Goal : Cut " + actualObjectif1 + " and " + actualObjectif2;
         }
         
 
@@ -323,5 +330,10 @@ public class GameManager : MonoBehaviour
                 Schema2.SetActive(true);
             }
         }
+    }
+
+    public void shake()
+    {
+        skeleton.GetComponent<Animator>().Play("Shake");
     }
 }

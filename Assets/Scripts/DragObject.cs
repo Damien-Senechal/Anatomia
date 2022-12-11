@@ -184,6 +184,7 @@ public class DragObject : MonoBehaviour
             other.gameObject.GetComponent<Outline>().enabled = false;
             GetComponent<MeshRenderer>().enabled = false;
             GameManager.verification[0] = true;
+            gameManager.shake();
         }
         else if(this.name == "Crane a placer" && other.name == "Emplacement crane")
         {
@@ -191,6 +192,7 @@ public class DragObject : MonoBehaviour
             other.gameObject.GetComponent<Outline>().enabled = false;
             GetComponent<MeshRenderer>().enabled = false;
             GameManager.verification[1] = true;
+            gameManager.shake();
         }
         else if (this.name == "Cubitus a placer" && other.name == "Emplacement cubitus")
         {
@@ -198,6 +200,7 @@ public class DragObject : MonoBehaviour
             other.gameObject.GetComponent<Outline>().enabled = false;
             GetComponent<MeshRenderer>().enabled = false;
             GameManager.verification[2] = true;
+            gameManager.shake();
         }
         else if (this.name == "Humerus a placer" && other.name == "Emplacement Humerus")
         {
@@ -205,6 +208,7 @@ public class DragObject : MonoBehaviour
             other.gameObject.GetComponent<Outline>().enabled = false;
             GetComponent<MeshRenderer>().enabled = false;
             GameManager.verification[3] = true;
+            gameManager.shake();
         }
         else if (this.name == "Crane a placer" && other.name == "Emplacement crane2")
         {
@@ -218,7 +222,10 @@ public class DragObject : MonoBehaviour
             }
             else if(gameManager.actualLevel == 1)
             {
-
+                if (other.name != GameManager.actualObjectif1 || other.name != GameManager.actualObjectif2)
+                {
+                    gameManager.Malus++;
+                }
                 other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
                 //other.gameObject.GetComponent<Outline>().enabled = false;
                 other.gameObject.GetComponent<DragObject>().canGrab = true;
@@ -228,7 +235,10 @@ public class DragObject : MonoBehaviour
         }
         else if (this.name == "Lame" && other.name == "biceps droit")
         {
-
+            if(other.name != GameManager.actualObjectif1 || other.name != GameManager.actualObjectif2)
+            {
+                gameManager.Malus++;
+            }
             other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
             //other.gameObject.GetComponent<Outline>().enabled = false;
             other.gameObject.GetComponent<DragObject>().canGrab = true;
@@ -237,7 +247,10 @@ public class DragObject : MonoBehaviour
         }
         else if (this.name == "Lame" && other.name == "poignet gauche")
         {
-
+            if (other.name != GameManager.actualObjectif1 || other.name != GameManager.actualObjectif2)
+            {
+                gameManager.Malus++;
+            }
             other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
             //other.gameObject.GetComponent<Outline>().enabled = false;
             other.gameObject.GetComponent<DragObject>().canGrab = true;
@@ -246,7 +259,10 @@ public class DragObject : MonoBehaviour
         }
         else if (this.name == "Lame" && other.name == "poignet droite")
         {
-
+            if (other.name != GameManager.actualObjectif1 || other.name != GameManager.actualObjectif2)
+            {
+                gameManager.Malus++;
+            }
             other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
             //other.gameObject.GetComponent<Outline>().enabled = false;
             other.gameObject.GetComponent<DragObject>().canGrab = true;
@@ -255,7 +271,10 @@ public class DragObject : MonoBehaviour
         }
         else if (this.name == "Lame" && other.name == "tete")
         {
-
+            if (other.name != GameManager.actualObjectif1 || other.name != GameManager.actualObjectif2)
+            {
+                gameManager.Malus++;
+            }
             other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
             //other.gameObject.GetComponent<Outline>().enabled = false;
             other.gameObject.GetComponent<DragObject>().canGrab = true;
@@ -264,7 +283,10 @@ public class DragObject : MonoBehaviour
         }
         else if (this.name == "Lame" && other.name == "hanche gauche")
         {
-
+            if (other.name != GameManager.actualObjectif1 || other.name != GameManager.actualObjectif2)
+            {
+                gameManager.Malus++;
+            }
             other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
             //other.gameObject.GetComponent<Outline>().enabled = false;
             other.gameObject.GetComponent<DragObject>().canGrab = true;
@@ -273,7 +295,10 @@ public class DragObject : MonoBehaviour
         }
         else if (this.name == "Lame" && other.name == "hanche droite")
         {
-
+            if (other.name != GameManager.actualObjectif1 || other.name != GameManager.actualObjectif2)
+            {
+                gameManager.Malus++;
+            }
             other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
             //other.gameObject.GetComponent<Outline>().enabled = false;
             other.gameObject.GetComponent<DragObject>().canGrab = true;
@@ -282,7 +307,10 @@ public class DragObject : MonoBehaviour
         }
         else if (this.name == "Lame" && other.name == "mollet gauche")
         {
-
+            if (other.name != GameManager.actualObjectif1 || other.name != GameManager.actualObjectif2)
+            {
+                gameManager.Malus++;
+            }
             other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
             //other.gameObject.GetComponent<Outline>().enabled = false;
             other.gameObject.GetComponent<DragObject>().canGrab = true;
@@ -291,7 +319,10 @@ public class DragObject : MonoBehaviour
         }
         else if (this.name == "Lame" && other.name == "mollet droit")
         {
-
+            if (other.name != GameManager.actualObjectif1 || other.name != GameManager.actualObjectif2)
+            {
+                gameManager.Malus++;
+            }
             other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
             //other.gameObject.GetComponent<Outline>().enabled = false;
             other.gameObject.GetComponent<DragObject>().canGrab = true;
