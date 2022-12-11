@@ -110,6 +110,7 @@ public class GameManager : MonoBehaviour
                     DownCam.SetActive(false);
                 }
             }
+            difference = 0;
         }
         /*else if(Input.GetAxis("Mouse ScrollWheel") > 0)
         {*/
@@ -124,6 +125,7 @@ public class GameManager : MonoBehaviour
             {
                 DownCam.SetActive(true);
             }
+            difference = 0;
         }
 
         if(actualLevel == 0)
@@ -233,6 +235,11 @@ public class GameManager : MonoBehaviour
             actualObjectif1 = nomOs[rand1];
             actualObjectif2 = nomOs[rand2];
         }
+        else if(actualCanvas==1)
+        {
+            DownCam.SetActive(false);
+            ProfCam.SetActive(true);
+        }
     }
 
     public void nextLevel()
@@ -272,8 +279,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         levels[0].SetActive(false);
         nextCanvas();
-        DownCam.SetActive(false);
-        ProfCam.SetActive(true);
+        Debug.Log("TA MERE LA PLUS GROSSE PUTE DU MONDE CEST BON LA ?");
     }
 
     public void activeMesh(int x)
