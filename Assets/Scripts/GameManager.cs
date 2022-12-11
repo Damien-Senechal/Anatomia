@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     public GameObject text2;
     public static bool inZoom = false;
     public GameObject sclapel;
-    private float difference;
+    private float difference = 0;
     public GameObject menuPause;
     public GameObject Schema;
     public GameObject Schema2;
@@ -235,11 +235,6 @@ public class GameManager : MonoBehaviour
             actualObjectif1 = nomOs[rand1];
             actualObjectif2 = nomOs[rand2];
         }
-        else if(actualCanvas==1)
-        {
-            DownCam.SetActive(false);
-            ProfCam.SetActive(true);
-        }
     }
 
     public void nextLevel()
@@ -279,6 +274,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         levels[0].SetActive(false);
         nextCanvas();
+        ProfCam.SetActive(true);
+        DownCam.SetActive(false);
         Debug.Log("TA MERE LA PLUS GROSSE PUTE DU MONDE CEST BON LA ?");
     }
 
