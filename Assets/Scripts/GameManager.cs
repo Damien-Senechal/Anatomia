@@ -80,7 +80,8 @@ public class GameManager : MonoBehaviour
             difference = currentMagnitude - prevMagnitude;
         }
 
-        //Debug.Log(Input.GetAxis("Mouse ScrollWheel"));
+        /*if(Input.GetAxis("Mouse ScrollWheel") < 0)
+        {*/
         if (difference < 0)
         {
             if(inZoom)
@@ -101,6 +102,8 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        /*else if(Input.GetAxis("Mouse ScrollWheel") > 0)
+        {*/
         else if (difference > 0)
         {
             //Debug.Log("Down");
