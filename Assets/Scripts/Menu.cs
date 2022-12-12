@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
+    public GameObject camera1;
+    public GameObject camera2;
+    public GameObject fondu;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +24,7 @@ public class Menu : MonoBehaviour
 
     public void Play()
     {
-        StartCoroutine(LaunchGame(1));
+        StartCoroutine(LaunchGame());
     }
 
     public void Exit()
@@ -28,9 +32,12 @@ public class Menu : MonoBehaviour
 
     }
     
-    IEnumerator LaunchGame(int x)
+    IEnumerator LaunchGame()
     {
-        yield return new WaitForSeconds(x);
+        camera2.GetComponent<CinemachineVirtualCamera>().Priority = 7;
+        fondu.SetActive(true);
+        yield return new WaitForSeconds(3);
+        
         SceneManager.LoadScene(1);
     }
 
@@ -38,5 +45,10 @@ public class Menu : MonoBehaviour
     {
         yield return new WaitForSeconds(x);
         Application.Quit();
+    }
+
+    public void lol()
+    {
+        
     }
 }

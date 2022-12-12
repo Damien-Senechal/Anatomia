@@ -1,14 +1,18 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject UpCam;
     public GameObject DownCam;
+    public GameObject DownCam2;
     public GameObject ProfCam;
+    public GameObject cameraBrain;
     public GameObject UI;
     public static bool[] verification = new bool[] {false, false, false, false};
     public bool check = false;
@@ -54,6 +58,7 @@ public class GameManager : MonoBehaviour
     public int Malus = 0;
     public GameObject skeleton;
     public GameObject textObjectif;
+    public GameObject fondu;
 
     // Start is called before the first frame update
     void Start()
@@ -109,6 +114,16 @@ public class GameManager : MonoBehaviour
                 {
                     DownCam.SetActive(false);
                 }
+                fonduGo();
+                /*if(UpCam.GetComponent<CinemachineVirtualCamera>().Priority == 0)
+                {
+                    cameraBrain.GetComponent<Camera>().orthographic = false;
+                    UpCam.GetComponent<CinemachineVirtualCamera>().Priority = 1;
+                }
+                if (DownCam.GetComponent<CinemachineVirtualCamera>().Priority == 1)
+                {
+                    DownCam.GetComponent<CinemachineVirtualCamera>().Priority = 0;
+                }*/
             }
             difference = 0;
         }
@@ -125,6 +140,16 @@ public class GameManager : MonoBehaviour
             {
                 DownCam.SetActive(true);
             }
+            fonduGo();
+            /*if (UpCam.GetComponent<CinemachineVirtualCamera>().Priority == 1)
+            {
+                UpCam.GetComponent<CinemachineVirtualCamera>().Priority = 0;
+            }
+            if (DownCam.GetComponent<CinemachineVirtualCamera>().Priority == 0)
+            {
+                cameraBrain.GetComponent<Camera>().orthographic = true;
+                DownCam.GetComponent<CinemachineVirtualCamera>().Priority = 1;
+            }*/
             difference = 0;
         }
 
@@ -194,12 +219,15 @@ public class GameManager : MonoBehaviour
             {
                 DownCam.SetActive(true);
                 ProfCam.SetActive(false);
+                fonduGo();
+
             }
         }
         if(actualCanvas == 2 || actualCanvas == 4)
         {
             ProfCam.SetActive(false);
-            DownCam.SetActive(true);
+            DownCam2.SetActive(true);
+            fonduGo();
         }
     }
 
@@ -251,8 +279,6 @@ public class GameManager : MonoBehaviour
         }
         if(actualLevel == 1)
         {
-            DownCam.GetComponent<Camera>().orthographicSize = 0.47f;
-            DownCam.transform.position = new Vector3(-1.01900005f, 1.86399996f, 3.98099995f);
             textObjectif.GetComponent<TextMeshProUGUI>().text = "Goal : Cut " + actualObjectif1 + " and " + actualObjectif2;
         }
         
@@ -276,6 +302,7 @@ public class GameManager : MonoBehaviour
         nextCanvas();
         ProfCam.SetActive(true);
         DownCam.SetActive(false);
+        fonduGo();
         Debug.Log("TA MERE LA PLUS GROSSE PUTE DU MONDE CEST BON LA ?");
     }
 
@@ -338,5 +365,22 @@ public class GameManager : MonoBehaviour
     public void shake()
     {
         skeleton.GetComponent<Animator>().Play("Shake");
+    }
+    
+    public void ehoh()
+    {
+        Debug.Log("ehoh");
+    }
+
+    public void fonduGo()
+    {
+        StartCoroutine("Fondu");
+    }
+        
+    IEnumerator Fondu()
+    {
+        fondu.SetActive(true);
+        yield return new WaitForSeconds(1.2f);
+        fondu.SetActive(false);
     }
 }

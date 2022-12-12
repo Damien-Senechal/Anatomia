@@ -95,7 +95,7 @@ public class DragObject : MonoBehaviour
                     }
                     if (!EventSystem.current.IsPointerOverGameObject())
                     {
-                        mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
+                        mZCoord = gameManager.cameraBrain.GetComponent<Camera>().WorldToScreenPoint(gameObject.transform.position).z;
                         mOffset = gameObject.transform.position - GetMouseWorldPos();
                         GetComponent<Rigidbody>().useGravity = false;
                         GetComponent<Rigidbody>().isKinematic = true;
@@ -135,7 +135,7 @@ public class DragObject : MonoBehaviour
 
         mousePoint.z = mZCoord;
 
-        return Camera.main.ScreenToWorldPoint(mousePoint);
+        return gameManager.cameraBrain.GetComponent<Camera>().ScreenToWorldPoint(mousePoint);
     }
 
     private void OnMouseDrag()
