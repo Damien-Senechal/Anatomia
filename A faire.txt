@@ -1,0 +1,23 @@
+Finir de modeliser l'amphi
+Finir de modeliser la cours
+Finir de modeliser les eleves
+Rig le squelette
+Faire le corps
+Rig le corps
+Replacer la camera ou trouver un moyen de montrer l'audience et le public
+ajouter la barre de degout
+animer le public
+enlever le rival pour l'instant
+ajouter le squelette
+pre selection des parties du corps a decouper et apres on appuie pour couper
+montrer qu'il faut mettre dans le bac
+garder objectif a l'ecran
+cinematique intro qui montre les lieux
+polish le rendu in game
+faire des petits schema de tuto
+animer le professeur qui nous parle
+mettre la camera en ortho quand elle est sur le public
+rendre le level 1 aleatoire
+essayer de mettre un timer ?
+
+faire les autres niveaux si il reste du temps (mais c'est pas la priorité faut polish le jeu d'abord)
