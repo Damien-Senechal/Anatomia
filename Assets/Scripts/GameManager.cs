@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] bonesmesh;
     public static string actualObjectif1;
     public static string actualObjectif2;
+    public GameObject fleche;
     public GameObject text1;
     public GameObject text2;
     public static bool inZoom = false;
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviour
     public int Malus = 0;
     public GameObject skeleton;
     public GameObject textObjectif;
+    public GameObject textObjectif2;
     public GameObject fondu;
 
     // Start is called before the first frame update
@@ -247,7 +249,7 @@ public class GameManager : MonoBehaviour
             {
                 rand2 = Random.Range(0, objectifs.Length);
             }
-            text1.GetComponent<TextMeshProUGUI>().text = "Cut the following members : \n" + objectifs[rand1] + "\n" + objectifs[rand2];
+            text1.GetComponent<TextMeshProUGUI>().text = "Cut the following members : \n" + objectifs[rand1] + "\n" + objectifs[rand2] +"\n And places them in the box on the left";
             actualObjectif1 = objectifs[rand1];
             actualObjectif2 = objectifs[rand2];
         }
@@ -280,6 +282,8 @@ public class GameManager : MonoBehaviour
         if(actualLevel == 1)
         {
             textObjectif.GetComponent<TextMeshProUGUI>().text = "Goal : Cut " + actualObjectif1 + " and " + actualObjectif2;
+            textObjectif2.GetComponent<TextMeshProUGUI>().text = "Goal : Cut " + actualObjectif1 + " and " + actualObjectif2;
+            fleche.SetActive(true);
         }
         
 
