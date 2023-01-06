@@ -155,7 +155,7 @@ public class DragObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.name == "poubelle" && this.name == GameManager.actualObjectif1)
+        if (other.name == "poubelle" && this.name == GameManager.actualObjectif1)
         {
             Debug.Log("ALLO1");
             if (GameManager.verification[0] == false)
@@ -163,7 +163,7 @@ public class DragObject : MonoBehaviour
                 GameManager.verification[0] = true;
             }
         }
-        else if(other.name == "poubelle" && this.name == GameManager.actualObjectif2)
+        else if (other.name == "poubelle" && this.name == GameManager.actualObjectif2)
         {
             Debug.Log("ALLO2");
             if (GameManager.verification[1] == false)
@@ -171,10 +171,10 @@ public class DragObject : MonoBehaviour
                 GameManager.verification[1] = true;
             }
         }
-        if(other.name == "GroundDetection")
+        if (other.name == "GroundDetection")
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
-            transform.position = initialPosition+new Vector3(0,.5f,0);
+            transform.position = initialPosition + new Vector3(0, .5f, 0);
 
         }
         //Debug.Log(this.name);
@@ -186,7 +186,7 @@ public class DragObject : MonoBehaviour
             GameManager.verification[0] = true;
             gameManager.shake();
         }
-        else if(this.name == "Crane a placer" && other.name == "Emplacement crane")
+        else if (this.name == "Crane a placer" && other.name == "Emplacement crane")
         {
             other.gameObject.GetComponent<MeshRenderer>().material = mMaterial;
             other.gameObject.GetComponent<Outline>().enabled = false;
@@ -216,11 +216,11 @@ public class DragObject : MonoBehaviour
         }
         else if (this.name == "Lame" && other.name == "biceps gauche")
         {
-            if(gameManager.getActualLevel() == 2)
+            if (gameManager.getActualLevel() == 2)
             {
 
             }
-            else if(gameManager.actualLevel == 1)
+            else if (gameManager.actualLevel == 1)
             {
                 if (other.name != GameManager.actualObjectif1 || other.name != GameManager.actualObjectif2)
                 {
@@ -235,7 +235,7 @@ public class DragObject : MonoBehaviour
         }
         else if (this.name == "Lame" && other.name == "biceps droit")
         {
-            if(other.name != GameManager.actualObjectif1 || other.name != GameManager.actualObjectif2)
+            if (other.name != GameManager.actualObjectif1 || other.name != GameManager.actualObjectif2)
             {
                 gameManager.Malus++;
             }
@@ -392,6 +392,19 @@ public class DragObject : MonoBehaviour
             //other.gameObject.GetComponent<Outline>().enabled = false;
             gameManager.activeMesh(2);
             other.tag = "Untagged";
+        }
+        else if (this.name == "Detection" || other.name == "Detection")
+        {
+            other.GetComponent<Outline>().OutlineWidth = 4;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (this.name == "Detection" || other.name == "Detection")
+        {
+            other.GetComponent<Outline>().OutlineWidth = 0;
+            Debug.Log("lol");
         }
     }
 }
