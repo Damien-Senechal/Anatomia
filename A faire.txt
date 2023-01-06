@@ -4,12 +4,10 @@ Finir de modeliser les eleves
 Rig le squelette
 Faire le corps
 Rig le corps
-Replacer la camera ou trouver un moyen de montrer l'audience et le public
 ajouter la barre de degout
 animer le public
 enlever le rival pour l'instant
 ajouter le squelette
-pre selection des parties du corps a decouper et apres on appuie pour couper
 montrer qu'il faut mettre dans le bac
 garder objectif a l'ecran
 cinematique intro qui montre les lieux
